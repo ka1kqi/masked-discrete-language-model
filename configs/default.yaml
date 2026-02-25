@@ -1,0 +1,35 @@
+# Model
+model:
+  vocab_size: 30522          # bert-base-uncased vocab
+  hidden_dim: 256
+  num_layers: 6
+  num_heads: 4
+  dropout: 0.1
+  max_seq_len: 128
+
+# Diffusion
+diffusion:
+  num_timesteps: 1000
+  schedule: cosine            # cosine | linear | log_linear
+  mask_token_id: 103          # [MASK] in bert-base-uncased
+
+# Training
+training:
+  dataset: roneneldan/TinyStories
+  batch_size: 64
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  warmup_steps: 1000
+  max_steps: 100000
+  grad_clip: 1.0
+  checkpoint_every: 5000
+  log_every: 10
+  output_dir: checkpoints
+
+# Sampling
+sampling:
+  steps: 50
+  seq_len: 128
+  temperature: 0.8
+  top_k: 50
+  strategy: confidence         # confidence | linear | random

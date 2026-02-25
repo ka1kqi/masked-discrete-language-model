@@ -1,0 +1,32 @@
+# Tiny config for fast local CPU training
+model:
+  vocab_size: 30522
+  hidden_dim: 128
+  num_layers: 4
+  num_heads: 4
+  dropout: 0.1
+  max_seq_len: 64
+
+diffusion:
+  num_timesteps: 1000
+  schedule: cosine
+  mask_token_id: 103
+
+training:
+  dataset: roneneldan/TinyStories
+  batch_size: 32
+  learning_rate: 3.0e-4
+  weight_decay: 0.01
+  warmup_steps: 500
+  max_steps: 5000
+  grad_clip: 1.0
+  checkpoint_every: 1000
+  log_every: 50
+  output_dir: checkpoints
+
+sampling:
+  steps: 50
+  seq_len: 64
+  temperature: 0.8
+  top_k: 50
+  strategy: confidence
